@@ -13,7 +13,12 @@ cv::Mat FeatureDetectorAndMatcher::SIFTPuzzle () {
 	char* filename = new char[200];
 	std::sprintf(filename, "Good_Matches_Piece_%d.txt", (int)idx);
 	txt_kpPiece.open(filename);*/
+
+
 	sift(Puzzle,cv::Mat(),keypointsImage,descriptorImg);
+
+    
+
 	cv::drawKeypoints(Puzzle,keypointsImage,img_keypoints,cv::Scalar::all(-1), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
 	/*Get keypoints location in a txt file
 	 * txt_kpPuzzle.open("Puzzle_Keypoints.txt");
@@ -148,9 +153,10 @@ cv::Mat FeatureDetectorAndMatcher::drawContourPiecesInPuzzle() {
 			else {
 				range = true;
 				subimage_puzzle = Puzzle(cv::Rect(corner_x,corner_y,width,height));
-				/*cv::imshow("Puzzle",subimage_puzzle);
+
+				cv::imshow("Puzzle",subimage_puzzle);
 				cv::imshow("Piece",Pieces[idx]);
-				cv::waitKey();*/
+				cv::waitKey();
 			}
 			cv::Mat img1 = hc.colorReduce(Pieces[idx],32);
 			cv::Mat img2 = hc.colorReduce(subimage_puzzle,32);

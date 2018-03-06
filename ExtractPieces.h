@@ -12,8 +12,9 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/ml/ml.hpp>
-#include <opencv2/nonfree/nonfree.hpp>
-#include <opencv2/features2d/features2d.hpp>
+//#include <opencv2/nonfree/nonfree.hpp>
+#include <opencv2/xfeatures2d/nonfree.hpp>
+#include <opencv2/features2d.hpp>
 #include <iostream>
 #include <vector>
 

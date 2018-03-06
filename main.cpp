@@ -9,7 +9,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/ml/ml.hpp>
-#include <opencv2/nonfree/nonfree.hpp>
+#include <opencv2/xfeatures2d/nonfree.hpp>
 #include <opencv2/features2d/features2d.hpp>
 #include <iostream>
 #include <vector>
@@ -64,13 +64,16 @@ int main( int argc, char** argv ) {
 				fdm.keypointsPieces[idx].size() << std::endl;
 		cv::waitKey();
 	}
-	//fdm.testMatches();
-	//fdm.getMatchedKeypoints();
-	//cv::Mat final = fdm.drawContourPiecesInPuzzle();
 
 
-	//cv::imshow("Pieces and Puzzle",final);
-	//cv::waitKey();
+	fdm.testMatches();
+	fdm.getMatchedKeypoints();
+	cv::Mat final = fdm.drawContourPiecesInPuzzle();
+
+	cv::imshow("Pieces and Puzzle",final);
+	cv::waitKey();
+
+
 	cv::imshow("Input Image", img[0]);
 	cvMoveWindow("Input Image", 0, 0);
 	cv::imshow("Contours", contourImage);

@@ -13,8 +13,9 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/ml/ml.hpp>
-#include <opencv2/nonfree/nonfree.hpp>
-#include <opencv2/features2d/features2d.hpp>
+//#include <opencv2/nonfree/nonfree.hpp>
+#include <opencv2/xfeatures2d/nonfree.hpp>
+#include <opencv2/features2d.hpp>
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -29,15 +30,24 @@ private:
 	std::vector<cv::Mat> descriptorPieces, Pieces;
 	cv::Mat descriptorPieces_temp;
 	std::vector<cv::KeyPoint> keypointsPieces_temp;
-	cv::SIFT sift;
+	//cv::xfeatures2d::SIFT sift;
+    cv::Ptr<cv::xfeatures2d::SIFT> sifter;
 	cv::FlannBasedMatcher matcher;
 	cv::Mat descriptorImg, drawContours;
 	std::vector<cv::DMatch> matches_temp, goodMatches_temp;
 	std::vector<std::vector<cv::Point> > contoursPieces, contoursPuzzle;
 	std::vector<cv::Point> OriginPieces;
 
+    cv::xfeatures2d::SIFT* sift( cv::Mat puz, cv::Mat idk, std::vector<cv::KeyPoint> &keyp, cv::Mat desc )
+    {
+        sifter->detect( puz, keyp );
+        sifter->compute( puz, keyp, desc );
+        return sifter;
+    }
+
 public:
 	FeatureDetectorAndMatcher() {
+        sifter = cv::xfeatures2d::SIFT::create();
 	};
 
 	std::vector<std::vector<int> > queryPieces, trainImage;
